@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import subprocess
+
+
+path = os.path.abspath(__file__)
+# subprocess.Popen("cd {0}".format(path), shell=True)
+stdout, stdin = subprocess.Popen("py.test", stdout=subprocess.PIPE, shell=True).communicate()
+stdout = str(stdout)
+if stdout.find("AssertionError") > 0:
+    print(stdout)
+    sys.exit(1)
+else:
+    sys.exit(0)
